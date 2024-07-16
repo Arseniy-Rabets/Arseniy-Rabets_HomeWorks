@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    let str = prompt('Введите строку')
+
+    function spaceSwap(_str){
+      let resultStr = ''
+
+      if(_str[0] === ' ' && _str[str.length-1] === ' '){
+        
+        resultStr += '$'+_str.slice(1,-1)+'$'
+
+      }
+      else if(_str[str.length-1] === ' '){
+        resultStr += _str.slice(0,-1) + '$'
+      }
+      else if (_str[0] === ' '){
+        resultStr += '$' + _str.slice(1)
+      }
+      else{
+        resultStr += _str
+      }
+
+      return alert(resultStr)
+    }
+
+
+    spaceSwap(str)
+    
+  </script>
+  
+</body>
+</html>
