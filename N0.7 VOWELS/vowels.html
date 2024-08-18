@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+
+    let str = prompt('Введите строку')
+
+    
+
+    function func(_str){
+      let vowels = {
+      а: 'а',
+      у:'у',
+      е:'е',
+      о:'о',
+      и:'и',
+      я:'я',
+      ы:"ы",
+      э:'э',
+      ю:'ю'
+    }
+
+    let count = 0
+
+    
+
+    let str = _str.toLowerCase().split('')
+
+    for(let i = 0; i < str.length; i++){
+      if(str[i] in vowels){
+        count++
+      }
+      else{
+        continue
+      }
+    }
+    alert(count)
+  }
+  func(str)
+
+  </script>
+
+</body>
+</html>
