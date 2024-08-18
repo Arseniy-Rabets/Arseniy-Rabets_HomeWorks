@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let pensia
+    let userName = prompt("Ваше имя")
+    for(;userName == "" || parseInt(userName);){
+      userName = prompt("Ваше Имя")
+    }
+    let userLastName = prompt("Ваша фамилия")
+    for(;userLastName == "" || parseInt(userLastName);){
+      userLastName = prompt("Ваша Фамилия")
+    }
+    let userSurname = prompt("Ваше отчество")
+    for(;userSurname == "" || parseInt(userSurname);){
+      userSurname = prompt("Ваше отчество")
+    }
+    let userAge = parseInt(prompt("Ваш возраст"))
+    for(;isNaN(userAge);){
+      userAge = parseInt(prompt("Ваш возраст"))
+    }    
+    
+    let userGender = confirm("Ваш пол - мужской?")
+    if (userGender) {
+      userGender = "Мужской"
+      if(userAge >= 60){
+        pensia = "Да"
+      }
+      else{
+        pensia = "Нет"
+      }
+      
+    } else {
+      userGender = "Женский"
+      if(userAge >= 55){
+        pensia = "Да"
+      }
+      else{
+        pensia = "Нет"
+      }
+    }
+    
+
+
+
+
+    alert(`Ваше ФИО: ${userLastName} ${userName} ${userSurname} \nВаш возраст в годах: ${userAge} \nВаш возвраст в дня: ${userAge*365} \nЧерез 5 лет вам будет: ${userAge + 5} \nВаш пол: ${userGender} \nВы на пенсии: ${pensia}`)
+  </script>
+</body>
+</html>
