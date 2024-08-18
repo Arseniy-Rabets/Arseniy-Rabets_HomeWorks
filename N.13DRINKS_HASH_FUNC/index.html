@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button>Ввод информации о напитке</button>
+    <button>Получение информации о напитке</button>
+    <button>Удаление информации о напитке</button>
+    <button>перечень всех напитков</button>
+    
+    <script>
+        let btns = document.getElementsByTagName('button')
+
+
+        function HashStorageFunc(){
+
+           
+            const storage = {}
+
+            this.addValue = (key, value) => {
+                storage[key] = value
+            }
+
+            this.getValue = function(key){
+                if(key in storage){
+                    return storage[key]
+                }
+                else{
+                    return false
+                }
+            }
+
+            this.deleteValue = function(key) {
+                if(key in storage){
+                    return delete storage[key]
+                }
+                else{
+                    return false
+                }
+            }
+
+            this.getKeys = function(key){
+                return Object.keys(storage)
+            }
+        } 
+
+        let dringStorage = new HashStorageFunc
+
+
+       
+        
+        btns[0].addEventListener('click', ()=>{
+            let alco
+            let key = prompt('Введите название напитка')
+            
+            if(confirm('Напиток алкогольный?')){
+                alco = 'да'
+            }
+            else{
+                alco = 'нет'
+            }
+            let rcp = prompt('Введите рецепт напитка')
+            return dringStorage.addValue(key,{
+                alc:alco,
+                recipe:rcp
+            })
+        })
+
+
+        btns[1].addEventListener('click', ()=>{
+            let key = prompt('Введите название напитка')
+            let obj = dringStorage.getValue(key)
+
+            if(dringStorage.getValue(key)){
+                alert(`Напиток: ${key} \nАлкогольный: ${obj.alc} \nРецепт приготовления: ${obj.recipe}`)
+            }
+            else{
+                alert('Такого напитка не существует')
+            }
+        })
+
+        btns[2].addEventListener('click', ()=>{
+            let key = prompt('Введите название напитка')
+            if(dringStorage.deleteValue(key)){
+                alert('Напиток удален')
+            }
+            else{
+                alert('Напитка не существует')
+            }
+        })
+
+        btns[3].addEventListener('click', ()=>{
+            let list = dringStorage.getKeys()
+            if(list.length === 0){
+                alert('Напитков нет')
+            }
+            else{
+                alert(list)
+            }
+        })
+
+    </script>
+
+</body>
+</html>
