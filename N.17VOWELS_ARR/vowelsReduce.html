@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+const str = prompt('Строка')
+
+const vowels = (str)=>{
+    let vowels = {
+а: 'а',
+у:'у',
+е:'е',
+о:'о',
+и:'и',
+я:'я',
+ы:"ы",
+э:'э',
+ю:'ю'
+}
+
+
+
+let arr = str.toLowerCase().split('')
+
+arrr = arr.reduce((a, e) => {
+if(e in vowels){
+    a++
+}
+return a
+}, 0);
+alert(arrr)
+}
+
+vowels(str)
+    </script>
+
+</body>
+</html>

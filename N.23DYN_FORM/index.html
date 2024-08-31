@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="formContainer"></div>
+
+    <script>
+      function createForm(formDef) {
+        const container = document.getElementById("formContainer");
+        const form = document.createElement("form");
+        
+        formDef.forEach((e) => {
+          const label = document.createElement("label");
+          label.textContent = e.label;
+          form.appendChild(label);
+
+          let input;
+          switch (e.kind) {
+            case "longtext":
+            case "shorttext":
+            case "email":
+            case "url":
+            case "number":
+              input = document.createElement("input");
+              if (e.kind === "shorttext") {
+                input.type = "text";
+              } else {
+                input.type = e.kind;
+              }
+              input.name = e.name;
+              break;
+            case "combo":
+              input = document.createElement("select");
+              input.name = e.name;
+              e.variants.forEach((variant) => {
+                const option = document.createElement("option");
+                option.value = variant.value;
+                option.textContent = variant.text;
+                input.appendChild(option);
+              });
+              break;
+            case "radio":
+              e.variants.forEach((variant) => {
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = e.name;
+                radio.value = variant.value;
+                form.appendChild(radio);
+                const radioLabel = document.createElement("label");
+                radioLabel.textContent = variant.text;
+                form.appendChild(radioLabel);
+              });
+              break;
+            case "check":
+              input = document.createElement("input");
+              input.type = "checkbox";
+              input.name = e.name;
+              break;
+            case "memo":
+              input = document.createElement("textarea");
+              input.name = e.name;
+              break;
+            case "submit":
+              input = document.createElement("button");
+              input.type = "submit";
+              input.textContent = e.caption;
+              break;
+          }
+          if (input) form.appendChild(input);
+          form.appendChild(document.createElement("br"));
+        });
+
+        container.appendChild(form);
+      }
+
+      const formDef1 = [
+        { label: "Название сайта:", kind: "longtext", name: "sitename" },
+        { label: "URL сайта:", kind: "longtext", name: "siteurl" },
+        { label: "Посетителей в сутки:", kind: "number", name: "visitors" },
+        { label: "E-mail для связи:", kind: "shorttext", name: "email" },
+        {
+          label: "Рубрика каталога:",
+          kind: "combo",
+          name: "division",
+          variants: [
+            { text: "здоровье", value: 1 },
+            { text: "домашний уют", value: 2 },
+            { text: "бытовая техника", value: 3 },
+          ],
+        },
+        {
+          label: "Размещение:",
+          kind: "radio",
+          name: "payment",
+          variants: [
+            { text: "бесплатное", value: 1 },
+            { text: "платное", value: 2 },
+            { text: "VIP", value: 3 },
+          ],
+        },
+        { label: "Разрешить отзывы:", kind: "check", name: "votes" },
+        { label: "Описание сайта:", kind: "memo", name: "description" },
+        { caption: "Опубликовать", kind: "submit" },
+      ];
+      const formDef2 = [
+        { label: "Фамилия:", kind: "longtext", name: "lastname" },
+        { label: "Имя:", kind: "longtext", name: "firstname" },
+        { label: "Отчество:", kind: "longtext", name: "secondname" },
+        { label: "Возраст:", kind: "number", name: "age" },
+        { caption: "Зарегистрироваться", kind: "submit" },
+      ];
+
+      createForm(formDef1);
+      createForm(formDef2);
+    </script>
+  </body>
+</html>

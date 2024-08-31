@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма регистрации сайта</title>
+    <style>
+        .error {
+            color: red;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Форма регистрации сайта</h1>
+    <form id="registrationForm" action="https://fe.it-academy.by/TestForm.php" method="post">
+        <label for="site-name">Название сайта:</label>
+        <input type="text" id="site-name" name="site-name" required>
+        <span class="error" id="site-name-error"></span><br><br>
+
+        <label for="url">URL сайта:</label>
+        <input type="url" id="url" name="url" required>
+        <span class="error" id="url-error"></span><br><br>
+
+        <label for="launch-date">Дата запуска сайта:</label>
+        <input type="date" id="launch-date" name="launch-date" required>
+        <span class="error" id="launch-date-error"></span><br><br>
+
+        <label for="visitors">Посетителей в сутки:</label>
+        <input type="number" id="visitors" name="visitors" required>
+        <span class="error" id="visitors-error"></span><br><br>
+
+        <label for="email">E-mail для связи:</label>
+        <input type="email" id="email" name="email" required>
+        <span class="error" id="email-error"></span><br><br>
+
+        <label for="category">Рубрика каталога:</label>
+        <select id="category" name="category" required>
+            <option value="health">Здоровье</option>
+            <option value="technology">Технологии</option>
+            <option value="education">Образование</option>
+        </select>
+        <span class="error" id="category-error"></span><br><br>
+
+        <label>Размещение:</label>
+        <input type="radio" id="free" name="placement" value="free" required>
+        <label for="free">Бесплатное</label>
+        <input type="radio" id="paid" name="placement" value="paid" required>
+        <label for="paid">Платное</label>
+        <input type="radio" id="vip" name="placement" value="vip" required>
+        <label for="vip">VIP</label>
+        <span class="error" id="placement-error"></span><br><br>
+
+        <label for="reviews">Разрешить отзывы:</label>
+        <input type="checkbox" id="reviews" name="reviews">
+        <span class="error" id="reviews-error"></span><br><br>
+
+        <label for="description">Описание сайта:</label><br>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea>
+        <span class="error" id="description-error"></span><br><br>
+
+        <button type="submit">Опубликовать</button>
+    </form>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            let isValid = true;
+            const fields = ['site-name', 'url', 'launch-date', 'visitors', 'email', 'category', 'placement', 'description'];
+            
+            fields.forEach(field => {
+                const input = document.getElementById(field);
+                const errorSpan = document.getElementById(field + '-error');
+                if (!input.value) {
+                    errorSpan.textContent = 'Это поле обязательно для заполнения';
+                    isValid = false;
+                } else {
+                    errorSpan.textContent = '';
+                }
+            });
+
+            if (!document.querySelector('input[name="placement"]:checked')) {
+                document.getElementById('placement-error').textContent = 'Выберите один из вариантов';
+                isValid = false;
+            } else {
+                document.getElementById('placement-error').textContent = '';
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        document.querySelectorAll('input, select, textarea').forEach(input => {
+            input.addEventListener('blur', function() {
+                const errorSpan = document.getElementById(input.id + '-error');
+                if (!input.value) {
+                    errorSpan.textContent = 'Это поле обязательно для заполнения';
+                } else {
+                    errorSpan.textContent = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
