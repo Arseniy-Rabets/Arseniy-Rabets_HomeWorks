@@ -11,14 +11,10 @@
 
 
       const isPalindrom = (str) =>{
-        console.log(str)
         const regExp = /['!"?.,()+-=:;`<>&#@/ /]/g
         
         let strr = str.split('').join('').replaceAll('ё', 'е').replace(/[ъ]/g, 'ь').replace(regExp, '').toLowerCase()
         let reverseStr = strr.split('').reverse().join('')
-
-        console.log(strr)
-        console.log(reverseStr)
 
         for(let i = 0; i<strr.length; i++){
           if(reverseStr[i] === strr[i]){

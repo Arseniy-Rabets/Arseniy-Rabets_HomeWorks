@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        img:hover{cursor: pointer;}
+        #image2, #image4{
+            border-radius: 47%;
+        }
+    </style>
+  </head>
+  <body>
+    <div id = dropzoneid>
+    <img src="http://fe.it-academy.by/Sites/0000007/sax.jpg" id = 'image1'/>
+    <img
+      src="http://fe.it-academy.by/Sites/0000007/Yin_and_Yang.png"
+      width="100"
+      id = 'image2'
+    />
+    <img
+      src="http://fe.it-academy.by/Sites/0000007/Man-and-woman.png"
+      width="150"
+      id = 'image3'
+    />
+    <img
+      src="http://fe.it-academy.by/Sites/0000007/No_smoking.png"
+      style="padding-left: 50px"
+        id = 'image4'
+      />
+</div>
+    
+
+    <script>
+
+        
+
+      class DragAndDrop{
+
+        constructor(dragElementId) {
+        this.dragElement = document.getElementById(dragElementId);
+        
+        this.init()
+        
+    }
+
+    init(){
+        this.dragElement.ondragstart= ()=>{
+            return false
+        }
+        this.dragElement.addEventListener('mousedown', this.onMouseDown.bind(this))
+        this.dragElement.addEventListener('mouseup', this.onMouseUp.bind(this))
+        
+    }
+
+    getCoords = (elem)=>{
+            let box = elem.getBoundingClientRect();
+  return {
+    top: box.top + pageYOffset,
+    left: box.left + pageXOffset
+  };
+        }
+        
+     
+    onMouseDown(e){
+
+        
+
+        let coords = this.getCoords(this.dragElement)
+        
+        let shiftX = e.pageX - coords.left
+        let shiftY = e.pageY - coords.top
+
+        this.dragElement.style.position = 'absolute'
+        document.body.appendChild(this.dragElement)
+        
+        this.moveAt = (e)=>{
+            this.dragElement.style.left = e.pageX - shiftX + 'px'
+            this.dragElement.style.top = e.pageY - shiftY + 'px'
+        }
+
+        this.moveAt(e)
+        this.dragElement.style.zIndex = 3
+
+        document.onmousemove = (e) =>{
+            this.moveAt(e)
+        }
+
+    }
+
+    
+    
+    onMouseUp(){
+        document.onmousemove = null
+        this.dragElement.onmouseup = null
+    }
+
+    
+    }
+    
+        new DragAndDrop('image1')
+        new DragAndDrop('image2')
+        new DragAndDrop('image3')
+        new DragAndDrop('image4')
+    
+      
+    </script>
+  </body>
+</html>
+
+<!-- var ball = document.getElementById('ball');
+
+ball.onmousedown = function(e) {
+
+  var coords = getCoords(ball);
+  var shiftX = e.pageX - coords.left;
+  var shiftY = e.pageY - coords.top;
+
+  ball.style.position = 'absolute';
+  document.body.appendChild(ball);
+  moveAt(e);
+
+  ball.style.zIndex = 1000; // над другими элементами
+
+  function moveAt(e) {
+    ball.style.left = e.pageX - shiftX + 'px';
+    ball.style.top = e.pageY - shiftY + 'px';
+  }
+
+  document.onmousemove = function(e) {
+    moveAt(e);
+  };
+
+  ball.onmouseup = function() {
+    document.onmousemove = null;
+    ball.onmouseup = null;
+  };
+
+}
+
+ball.ondragstart = function() {
+  return false;
+};
+
+function getCoords(elem) {   // кроме IE8-
+  var box = elem.getBoundingClientRect();
+  return {
+    top: box.top + pageYOffset,
+    left: box.left + pageXOffset
+  };
+} -->

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const isPalindrome = (str) => {
+        const regExp = /['!"?.,()+-=:;`<>&#@/ /]/g;
+
+        let strr = str
+          .split("")
+          .join("")
+          .replaceAll("ё", "е")
+          .replace(/[ъ]/g, "ь")
+          .replace(regExp, "")
+          .toLowerCase();
+       
+
+        if (strr.length <= 1) {
+          return alert("палиндром");
+        } else {
+          let first = strr[0];
+          let last = strr[strr.length - 1];
+          if (first === last) {
+           
+            return isPalindrome(strr.slice(1, -1));
+          } else {
+            return alert("не палиндром");
+          }
+        }
+      }
+
+      isPalindrome(prompt("Введите строку"));
+    </script>
+  </body>
+</html>
